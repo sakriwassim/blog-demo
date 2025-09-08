@@ -1,0 +1,296 @@
+body,
+ul,
+li,
+h1,
+h2,
+a {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+header {
+    background-color: rgb(0, 15, 174);
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    padding: 10px;
+    z-index: 1;
+    top: 0;
+    left: 0;
+}
+
+header h1 {
+    color: white;
+    border: 4px solid white;
+    border-radius: 36px;
+    padding: 10px 10px;
+    display: inline-block;
+}
+
+.banner {
+    position: relative;
+}
+
+.banner img {
+    max-width: 100%;
+}
+
+.banner h1 {
+    color: white;
+    font-size: 100;
+    text-align: center;
+    font-size: 70px;
+
+}
+
+.banner p {
+    color: white;
+    font-size: 50;
+    text-align: center;
+}
+
+.banner h2 {
+    font-size: 74;
+    text-align: center;
+}
+
+.banner h2 samp {
+    font-size: 1.3em;
+    text-align: center;
+}
+
+nav {
+    background-color: #f4f4f4;
+    padding: 10px;
+    position: sticky;
+    top: 80px;
+}
+
+nav ul {
+    max-width: 1200px;
+    white-space: nowrap;
+    padding: 0 auto;
+}
+
+nav li {
+    text-align: center;
+    width: 25%;
+    display: inline-block;
+}
+
+nav li a {
+    text-decoration: none;
+    color: #4b4b4b;
+}
+
+
+main {
+    max-width: 100%;
+    width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+article h2 {
+    color: blue;
+    font-size: 48px;
+}
+
+article p {
+    line-height: 2em;
+    color: #4b4b4b;
+}
+
+.images {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.images li {
+    display: inline-block;
+    width: 100%;
+    margin: 20px 5%;
+}
+
+.images li img {
+    border-radius: 5%;
+    max-width: 100%;
+    display: inline-block;
+    width: 100%;
+}
+
+section.join {
+    background: #f4f4f4;
+    text-align: center;
+    padding: 60px 20px;
+    color: #4b4b4b
+}
+
+.join h2 {
+    font-size: 36px;
+}
+
+form input {
+    margin: 20px 0;
+    padding: 10px 20px;
+    font-size: 24px;
+    border-radius: 28px;
+    border: 1px solid white;
+}
+
+footer {
+    text-align: center;
+    color: white;
+    padding: 20px;
+    background: rgba(142, 142, 255, 0.826);
+}
+
+/*pseudo calsses*/
+
+nav li a:hover {
+    color: blue;
+    text-decoration: underline;
+    padding: 3px;
+}
+
+.images li:hover {
+    position: relative;
+    top: -4px;
+    left: 3px;
+}
+
+form input:hover {
+    border: 1px solid blue;
+}
+
+form input:valid {
+    border: 1px solid greenyellow;
+}
+
+/*pseudo elements*/
+
+/* article p::first-line{
+    font-weight: bold;
+    color: aqua;
+} */
+article p::selection {
+    background-color: rgb(0, 15, 174);
+    color: white;
+}
+
+p::after {
+    content: "...";
+}
+
+/* responsive styles */
+
+
+@media screen and (max-width: 1400px) {
+    .join h2 {
+        font-size: 60px;
+    }
+
+    article h2 {
+        font-size: 60px;
+    }
+
+    nav li {
+        font-size: 18px;
+    }
+
+    form input {
+        font-size: 22px;
+    }
+}
+
+@media screen and (max-width: 960px) {
+    header h1 {
+        font-size: 20px;
+    }
+
+    .join h2 {
+        font-size: 50px;
+    }
+
+    article h2 {
+        font-size: 50px;
+    }
+
+    nav li {
+        font-size: 16px;
+    }
+
+    form input {
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    header h1 {
+        font-size: 18px;
+    }
+
+    .join h2 {
+        font-size: 25px;
+    }
+
+    article h2 {
+        font-size: 25px;
+    }
+
+    nav li {
+        font-size: 16px;
+    }
+
+    form input {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    header h1 {
+        font-size: 10px;
+    }
+
+    .join h2 {
+        font-size: 20px;
+    }
+
+    article h2 {
+        font-size: 20px;
+    }
+
+    nav li {
+        font-size: 20px;
+        width: 100%;
+        margin: 12px 0;
+        display: block;
+    }
+
+    header {
+        position: relative;
+    }
+
+    .images li {
+        width: 100%;
+        margin: 20px auto;
+        display: block;
+        margin: 20px 0;
+        white-space: nowrap;
+    }
+
+    nav {
+        top: 0;
+    }
+
+    form input {
+        font-size: 15px;
+    }
+}

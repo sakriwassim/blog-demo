@@ -5,12 +5,6 @@ import { fileURLToPath } from 'url'
 
 import config from '@/payload.config'
 import './styles.css'
-import { Page } from '@playwright/test'
-
-import HeroBlock from './components/hero_block'
-import NewsletterBlock from './components/NewsletterBlock'
-import Content from './components/content'
-import Post from './components/posts'
 
 export default async function HomePage() {
   const headers = await getHeaders()
@@ -33,26 +27,108 @@ export default async function HomePage() {
     return < div >No pages found</div>
   }
 
-  const renderBlock = (block: Page['layout'][0]) => {
-    switch (block.blockType) {
-      case 'hero':
-        return <HeroBlock block={block} key={block.id} />
-      case 'content':
-        return <Content block={block} key={block.id} />
-      case 'newsletter-form':
-        return <NewsletterBlock block={block} key={block.id} />
-      case 'example-collection':
-        return <Post block={block} key={block.id} />
-      default:
-        return null
-    }
-  }
+  const postCollectionBlock = page.layout.find(
+    (block: any) => block.blockType === 'posts-collection'
+  );
+
+  const images = postCollectionBlock?.posts || [];
+
+  const heroCollectionBlock = page.layout.find(
+    (block: any) => block.blockType === 'hero'
+  );
+
+
 
   return (
     <div>
-      {page.title}
-      {/* <pre>{JSON.stringify(page.layout[0], null, 2)}</pre> */}
-      <div>{page.layout.map(block => renderBlock(block))}</div>
+      {/* Head should be inside metadata or <Head />, not here */}
+      <header>
+        <h1>{page.title}</h1>
+      </header>
+
+      <div style=
+        {{
+          backgroundImage: `url(${heroCollectionBlock?.image?.url})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <div className="banner ">
+          <h1>{heroCollectionBlock?.heading}</h1>
+          <p>{heroCollectionBlock?.subheading}</p>
+        </div>
+      </div>
+
+
+      <nav className="main-nav">
+        <ul>
+          <li>
+            <a href="#join" className="join">
+              Join the club
+            </a>
+          </li>
+          <li>
+            <a href="#news">Latest news</a>
+          </li>
+          <li>
+            <a href="#games">New games</a>
+          </li>
+          <li>
+            <a href="#join">Contact</a>
+          </li>
+        </ul>
+      </nav>
+
+      <main>
+        <article id="news">
+          <h2>It's me, Mario</h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Error fuga
+            ea hic molestias quasi repudiandae eius ut, nisi aspernatur delectus
+            tempore, quia voluptatibus eveniet. Repellendus animi itaque sunt
+            omnis voluptatibus.
+          </p>
+        </article>
+
+        <ul className="images" id="games">
+          {images.map((img, index) => (
+            <li key={index} >
+              <figure>
+                <img src={img.image.url} alt={img.image.alt} />
+                <figcaption>{img.title}</figcaption>
+                <body>
+                  <p>{img.body}</p>
+                </body>
+              </figure>
+            </li>
+          ))}
+
+        </ul>
+      </main>
+
+      <section className="join" id="join">
+        <h2>Join Today!</h2>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus eum
+          magnam dolorum, eligendi eveniet accusamus.
+        </p>
+        <form>
+          <input
+            type="email"
+            name="email"
+            placeholder="enter your email"
+            required
+          />
+        </form>
+      </section>
+
+      <footer>
+        <p className="copyright">© 2019 Marioclub</p>
+      </footer>
     </div>
-  )
+  );
 }

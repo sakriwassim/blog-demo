@@ -30,7 +30,7 @@ const Pages: CollectionConfig = {
                         },
                         {
                             name: 'subheading',
-                            type: 'richText',
+                            type: 'text',
                             required: true,
                         },
                         {
@@ -38,23 +38,6 @@ const Pages: CollectionConfig = {
                             type: 'upload',
                             relationTo: 'media',
                             required: true,
-                        },
-                        {
-                            name: 'button',
-                            type: 'group',
-                            required: true,
-                            fields: [
-                                {
-                                    name: 'label',
-                                    type: 'text',
-                                    required: true,
-                                },
-                                {
-                                    name: 'link',
-                                    type: 'text',
-                                    required: true,
-                                }
-                            ],
                         }
                     ],
                 },
@@ -97,18 +80,15 @@ const Pages: CollectionConfig = {
 
                 // Example of a custom block with an array field
                 {
-                    slug: 'example-collection',
+                    slug: 'posts-collection',
                     fields: [
                         {
-                            name: 'slider', // required
+                            name: 'posts', // required
                             type: 'array', // required
-                            label: 'Image Slider',
-                            minRows: 2,
-                            maxRows: 10,
-                            // interfaceName: 'CardSlider', // optional
+                            label: 'list of posts', // optional
                             labels: {
-                                singular: 'Slide',
-                                plural: 'Slides',
+                                singular: 'Post',
+                                plural: 'Posts',
                             },
                             fields: [
                                 // required

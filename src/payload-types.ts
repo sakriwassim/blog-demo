@@ -173,26 +173,8 @@ export interface Page {
   layout: (
     | {
         heading: string;
-        subheading: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        };
+        subheading: string;
         image: string | Media;
-        button: {
-          label: string;
-          link: string;
-        };
         id?: string | null;
         blockName?: string | null;
         blockType: 'hero';
@@ -226,7 +208,7 @@ export interface Page {
         blockType: 'newsletter-form';
       }
     | {
-        slider?:
+        posts?:
           | {
               title?: string | null;
               image: string | Media;
@@ -236,7 +218,7 @@ export interface Page {
           | null;
         id?: string | null;
         blockName?: string | null;
-        blockType: 'example-collection';
+        blockType: 'posts-collection';
       }
   )[];
   updatedAt: string;
@@ -558,12 +540,6 @@ export interface PagesSelect<T extends boolean = true> {
               heading?: T;
               subheading?: T;
               image?: T;
-              button?:
-                | T
-                | {
-                    label?: T;
-                    link?: T;
-                  };
               id?: T;
               blockName?: T;
             };
@@ -583,10 +559,10 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        'example-collection'?:
+        'posts-collection'?:
           | T
           | {
-              slider?:
+              posts?:
                 | T
                 | {
                     title?: T;
