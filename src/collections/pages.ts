@@ -54,8 +54,14 @@ const Pages: CollectionConfig = {
                         },
                         {
                             name: "content",
-                            type: "richText",
+                            type: "text",
                             required: true,
+                        },
+                        {
+                            name: "image",
+                            type: "upload",
+                            relationTo: "media",
+                            required: false,
                         }
                     ],
                 },
@@ -65,6 +71,11 @@ const Pages: CollectionConfig = {
                     fields: [
                         {
                             name: 'heading',
+                            type: 'text',
+                            required: false,
+                        },
+                        {
+                            name: 'body',
                             type: 'text',
                             required: false,
                         },

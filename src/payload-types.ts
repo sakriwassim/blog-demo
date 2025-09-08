@@ -181,27 +181,15 @@ export interface Page {
       }
     | {
         heading: string;
-        content: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        };
+        content: string;
+        image?: (string | null) | Media;
         id?: string | null;
         blockName?: string | null;
         blockType: 'content';
       }
     | {
         heading?: string | null;
+        body?: string | null;
         form: string | Form;
         id?: string | null;
         blockName?: string | null;
@@ -548,6 +536,7 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               heading?: T;
               content?: T;
+              image?: T;
               id?: T;
               blockName?: T;
             };
@@ -555,6 +544,7 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               heading?: T;
+              body?: T;
               form?: T;
               id?: T;
               blockName?: T;

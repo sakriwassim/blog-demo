@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url'
 
 import config from '@/payload.config'
 import './styles.css'
+import { block } from 'sharp'
 
 export default async function HomePage() {
   const headers = await getHeaders()
@@ -30,11 +31,20 @@ export default async function HomePage() {
   const postCollectionBlock = page.layout.find(
     (block: any) => block.blockType === 'posts-collection'
   );
+  const listofsectionsCollectionBlock = page.layout.map(block => block.blockType);
 
   const images = postCollectionBlock?.posts || [];
 
   const heroCollectionBlock = page.layout.find(
     (block: any) => block.blockType === 'hero'
+  );
+
+  const contentCollectionBlock = page.layout.find(
+    (block: any) => block.blockType === 'content'
+  );
+
+  const joinUsCollectionBlock = page.layout.find(
+    (block: any) => block.blockType === 'newsletter-form'
   );
 
 
@@ -56,6 +66,7 @@ export default async function HomePage() {
           justifyContent: "center",
           alignItems: "center",
         }}
+        id={`${heroCollectionBlock?.blockType}`}
       >
         <div className="banner ">
           <h1>{heroCollectionBlock?.heading}</h1>
@@ -65,36 +76,31 @@ export default async function HomePage() {
 
 
       <nav className="main-nav">
-        <ul>
-          <li>
-            <a href="#join" className="join">
-              Join the club
-            </a>
-          </li>
-          <li>
-            <a href="#news">Latest news</a>
-          </li>
-          <li>
-            <a href="#games">New games</a>
-          </li>
-          <li>
-            <a href="#join">Contact</a>
-          </li>
+
+        <ul >
+          {listofsectionsCollectionBlock.map((section, index) => (
+            <li key={index} >
+              <li>
+                <a href={`#${section}`} className="join">
+                  {section}
+                </a>
+              </li>
+            </li>
+          ))}
+
         </ul>
       </nav>
 
       <main>
-        <article id="news">
-          <h2>It's me, Mario</h2>
+        <article id={`${contentCollectionBlock?.blockType}`}>
+          <h2>{contentCollectionBlock?.heading}</h2>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Error fuga
-            ea hic molestias quasi repudiandae eius ut, nisi aspernatur delectus
-            tempore, quia voluptatibus eveniet. Repellendus animi itaque sunt
-            omnis voluptatibus.
+            {contentCollectionBlock?.content}
           </p>
+          <img src={contentCollectionBlock?.image?.url} alt={contentCollectionBlock?.image?.alt} />
         </article>
 
-        <ul className="images" id="games">
+        <ul className="images" id={`${postCollectionBlock?.blockType}`}>
           {images.map((img, index) => (
             <li key={index} >
               <figure>
@@ -110,11 +116,11 @@ export default async function HomePage() {
         </ul>
       </main>
 
-      <section className="join" id="join">
-        <h2>Join Today!</h2>
+      <section className="join" id={`${joinUsCollectionBlock?.blockType}`}>
+
+        <h2>{joinUsCollectionBlock?.heading}</h2>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus eum
-          magnam dolorum, eligendi eveniet accusamus.
+          {joinUsCollectionBlock?.body}
         </p>
         <form>
           <input
