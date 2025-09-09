@@ -123,12 +123,18 @@ export default async function HomePage() {
           {joinUsCollectionBlock?.body}
         </p>
         <form>
-          <input
-            type="email"
-            name="email"
-            placeholder="enter your email"
-            required
-          />
+
+          {joinUsCollectionBlock?.form.fields.map((field: any, index: number) => (
+            <div key={index}>
+              <input
+                type={field.type}
+                name={field.name}
+                placeholder={field.name}
+                required={field.required}
+              />
+            </div>
+          ))}
+          <button type="submit">Subscribe</button>
         </form>
       </section>
 
