@@ -19,18 +19,19 @@ export default async function HomePage() {
   const { user } = await payload.auth({ headers })
 
   const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`
+  // const slug = useParams()?.slug
 
   const { docs: [page] } = await payload.find({
     collection: 'pages',
     where: {
       slug: {
-        equals: 'here is the slug '
+        equals: 'home-page'
       }
     }
   })
 
   if (!page) {
-    return < div >No pages found</div>
+    return <div>No pages found</div>
   }
 
   const renderBlock = (block: Page['layout'][0]) => {
